@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnhbqh5evruxs"]
+
+[ext_resource type="Script" path="res://scripts/asteroid.gd" id="1_cutlj"]
+[ext_resource type="Texture2D" uid="uid://c23o141hnvx2n" path="res://assets/sprites/asteroid_sm1.png" id="2_51n0u"]
+[ext_resource type="Shape2D" uid="uid://bc6ml340o2ivr" path="res://resources/asteroid_collision_large.tres" id="3_88qgj"]
+
+[node name="Asteroid" type="Area2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_cutlj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_51n0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("3_88qgj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

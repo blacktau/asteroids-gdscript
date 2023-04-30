@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce26vravpncf3"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_1y2k1"]
+[ext_resource type="Texture2D" uid="uid://c8tlvmxsfjwrw" path="res://assets/sprites/player1.png" id="2_up1ft"]
+[ext_resource type="Texture2D" uid="uid://bc0juiscaafi2" path="res://assets/sprites/player2.png" id="3_70y5e"]
+[ext_resource type="AudioStream" uid="uid://b6qrf7f6bn53j" path="res://assets/sounds/lazer.mp3" id="4_wky31"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxurh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_up1ft")
+}],
+"loop": true,
+"name": &"coasting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_70y5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_up1ft")
+}],
+"loop": true,
+"name": &"thrusting",
+"speed": 49.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_1y2k1")
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(1, -1)
+rotation = 1.5708
+polygon = PackedVector2Array(-31, 1.00011, 24.0001, 18.9999, 23.9999, -19.0001)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cxurh")
+animation = &"thrusting"
+frame_progress = 0.57
+
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(0, -34)
+
+[node name="ShootingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wky31")
